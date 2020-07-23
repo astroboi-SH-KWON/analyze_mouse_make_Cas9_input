@@ -54,6 +54,6 @@ def make_deep_cas9_input():
 if __name__ == '__main__':
     start_time = time.perf_counter()
     print("start [" + PROJECT_NAME + "]>>>>>>>>>>>>>>>>>>")
-    sort_n_merge_by_chr()
+    sort_n_merge_by_chr()  # 2
     # make_deep_cas9_input()  # 1
     print("::::::::::: %.2f seconds ::::::::::::::" % (time.perf_counter() - start_time))
