@@ -31,16 +31,17 @@ MAX_MISMATCH = 3
 REF_SRV_PATH = "FASTA/marmoset"
 INIT_BE = [PAM_SEQ, FRONT_WIN_LEN, gRNA_LEN, BE_BACK_WIN_LEN, CLEAVAGE_SITE]
 #################### top N #####################
-TOP_N = 2000000
+TOP_N = 1000
+# TOP_N = 2000000
 INIT_MERGE_BY_CHAR = [REF_PATH, CDS_FILE, A_or_C_IDX, ACTG_RULE, WORK_DIR, TOP_N]
 ############### end setting env ################
 
 def sort_n_merge_by_chr():
     logic = Logic.Logics()
-    logic.sort_n_merge_by_chr(INIT_MERGE_BY_CHAR, INIT_BE)
+    # logic.sort_n_merge_by_chr(INIT_MERGE_BY_CHAR, INIT_BE)  # plan A
+    logic.sort_n_merge_by_chr_one_file(INIT_MERGE_BY_CHAR, INIT_BE)  # plan B # TOP_N <= 100
 
 def make_deep_cas9_input():
-    logic = Logic.Logics()
     logic_prep = LogicPrep.LogicPreps()
     util = Util.Utils()
 

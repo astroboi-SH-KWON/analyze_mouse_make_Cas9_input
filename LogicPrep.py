@@ -166,11 +166,15 @@ class LogicPreps:
             for trgt_idx in range(1, len(vals_arr)):
                 cntxt_seq = vals_arr[trgt_idx][0]
 
-                # check same seq in check_duple
+                """
+                # extend TOP N lists to (top_n_abe_list, top_n_cbe_list)
+                it needs filter out same context seq in different trnscrpt
+                """
                 if cntxt_seq in check_duple:
                     continue
                 else:
                     check_duple.add(cntxt_seq)
+                # end check same seq in check_duple
 
                 clvg_site = vals_arr[trgt_idx][1]
                 cas9_score = 0

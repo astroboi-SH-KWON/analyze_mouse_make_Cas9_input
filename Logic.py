@@ -84,3 +84,39 @@ class Logics:
             """
             util.make_tsv_after_sorting(work_dir + "output/mouse_seq_sorted_by_CAS9_" + chr_key, sort_by_cas9_list, init_be)
 
+    def sort_n_merge_by_chr_one_file(self, init_merge, init_be):
+        ref_path = init_merge[0]
+        cdf_file = init_merge[1]
+        a_or_c_idx = init_merge[2]
+        a_c_rule = init_merge[3]
+        work_dir = init_merge[4]
+        top_n = init_merge[5]
+
+        logic_prep = LogicPrep.LogicPreps()
+        util = Util.Utils()
+
+        trgt_seq_dict = logic_prep.get_target_seq_with_clvg_site(ref_path + cdf_file, init_be)
+        chr_dict = logic_prep.target_seq_with_clvg_site_group_by_chromosome(trgt_seq_dict)
+
+        cs9_score_dict = {}
+        cs9_score_dict.update(logic_prep.get_deep_cas9_tupl(work_dir + "deep_cas_9/", "RANK_final_DeepCas9_0.txt",
+                                                            "sample_0.txt"))
+        cs9_score_dict.update(logic_prep.get_deep_cas9_tupl(work_dir + "deep_cas_9/", "RANK_final_DeepCas9_1.txt",
+                                                            "sample_1.txt"))
+
+        top_n_list = []
+        for chr_key, trnscrpt_list in chr_dict.items():
+            result_list = []
+            result_list = logic_prep.merge_cas9_abe_cbe_to_list(chr_key, [trnscrpt_list, {}, {},
+                                                                          cs9_score_dict], result_list)
+
+            sort_by_cas9_list = logic_prep.sort_by_idx_element(result_list, -3, [])
+
+            top_n_list.extend(sort_by_cas9_list[:top_n + 1])
+
+        # make tsv file result
+        util.make_tsv_after_sorting(work_dir + "output/mouse_seq_sorted_by_CAS9_top_" + str(top_n), top_n_list, init_be)
+        # make excel result
+        util.make_excel_after_sorting(work_dir + "output/mouse_seq_sorted_by_CAS9_top_" + str(top_n), top_n_list, init_be)
+
+

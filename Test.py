@@ -31,7 +31,8 @@ MAX_MISMATCH = 3
 REF_SRV_PATH = "FASTA/marmoset"
 INIT_BE = [PAM_SEQ, FRONT_WIN_LEN, gRNA_LEN, BE_BACK_WIN_LEN, CLEAVAGE_SITE]
 #################### top N #####################
-TOP_N = 2000000
+TOP_N = 100
+# TOP_N = 2000000
 INIT_MERGE_BY_CHAR = [REF_PATH, CDS_FILE, A_or_C_IDX, ACTG_RULE, WORK_DIR, TOP_N]
 ############### end setting env ################
 
