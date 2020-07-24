@@ -78,10 +78,6 @@ class Logics:
 
             sort_by_cas9_list = logic_prep.sort_by_idx_element(result_list, -3, [])
 
-            """
-            # extend TOP N lists to (top_n_abe_list, top_n_cbe_list)
-            it needs filter out same context seq in different trnscrpt
-            """
             util.make_tsv_after_sorting(work_dir + "output/mouse_seq_sorted_by_CAS9_" + chr_key, sort_by_cas9_list, init_be)
 
     def sort_n_merge_by_chr_one_file(self, init_merge, init_be):
