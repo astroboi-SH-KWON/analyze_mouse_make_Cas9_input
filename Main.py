@@ -9,8 +9,9 @@ import LogicPrep
 WORK_DIR = os.getcwd() + "/"
 PROJECT_NAME = WORK_DIR.split("/")[-2]
 
-REF_PATH = "D:/000_WORK/000_reference_path/mouse/"
-CDS_FILE = "cds/Mus_musculus.GRCm38.cds.all.fa"
+# REF_PATH = "D:/000_WORK/000_reference_path/mouse/"
+REF_PATH = "D:/000_WORK/000_reference_path/monkey/marmoset/"
+CDS_FILE = "cds/Callithrix_jacchus.ASM275486v1.cds.all.fa"
 DNA_FILE = "dna/"
 ANNO_FILE = "genbank_anno/"
 
@@ -29,7 +30,7 @@ BE_BACK_WIN_LEN = 20
 CLEAVAGE_SITE = 3
 MAX_MISMATCH = 3
 REF_SRV_PATH = "FASTA/marmoset"
-INIT_BE = [PAM_SEQ, FRONT_WIN_LEN, gRNA_LEN, BE_BACK_WIN_LEN, CLEAVAGE_SITE]
+INIT_BE = [PAM_SEQ, FRONT_WIN_LEN, gRNA_LEN, BE_BACK_WIN_LEN, CLEAVAGE_SITE, REF_PATH.split("/")[-2]]
 #################### top N #####################
 TOP_N = 1000
 # TOP_N = 2000000
@@ -55,6 +56,20 @@ def make_deep_cas9_input():
 if __name__ == '__main__':
     start_time = time.perf_counter()
     print("start [" + PROJECT_NAME + "]>>>>>>>>>>>>>>>>>>")
-    sort_n_merge_by_chr()  # 2
     # make_deep_cas9_input()  # 1
+    """
+    make_deep_cas9_input() 돌리기전 deep_cas_9 폴더에 sample_0.txt, sample_1.txt 삭제
+    # 1의 결과물 sample_0.txt, sample_1.txt을 각각 순차적으로
+    D:\Github\monkey_PE2_efficiency_prediction_merge\DeepCas9\에
+    DeepCas9_example_input.txt 으로 변경(header는 그대로, seq만 사용)
+
+    Test.py 돌려서 RANK_final_DeepCas9.txt 결과 파일 생성
+    """
+    sort_n_merge_by_chr()  # 2
+    """
+    RANK_final_DeepCas9.txt 결과 파일들과 sample_0.txt, sample_1.txt를 번호 매칭
+    ex) RANK_final_DeepCas9_0.txt 와 RANK_final_DeepCas9_1.txt
+    chromosome별로 TOP_N개씩 모아서 한 파일로 만들기 : sort_n_merge_by_chr_one_file
+    """
+
     print("::::::::::: %.2f seconds ::::::::::::::" % (time.perf_counter() - start_time))

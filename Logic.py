@@ -58,6 +58,7 @@ class Logics:
         a_c_rule = init_merge[3]
         work_dir = init_merge[4]
         top_n = init_merge[5]
+        f_nm = init_be[5]
 
         logic_prep = LogicPrep.LogicPreps()
         util = Util.Utils()
@@ -78,7 +79,7 @@ class Logics:
 
             sort_by_cas9_list = logic_prep.sort_by_idx_element(result_list, -3, [])
 
-            util.make_tsv_after_sorting(work_dir + "output/mouse_seq_sorted_by_CAS9_" + chr_key, sort_by_cas9_list, init_be)
+            util.make_tsv_after_sorting(work_dir + "output/" + f_nm + "_seq_sorted_by_CAS9_" + chr_key, sort_by_cas9_list, init_be)
 
     def sort_n_merge_by_chr_one_file(self, init_merge, init_be):
         ref_path = init_merge[0]
@@ -87,6 +88,7 @@ class Logics:
         a_c_rule = init_merge[3]
         work_dir = init_merge[4]
         top_n = init_merge[5]
+        f_nm = init_be[5]
 
         logic_prep = LogicPrep.LogicPreps()
         util = Util.Utils()
@@ -111,8 +113,8 @@ class Logics:
             top_n_list.extend(sort_by_cas9_list[:top_n + 1])
 
         # make tsv file result
-        util.make_tsv_after_sorting(work_dir + "output/mouse_seq_sorted_by_CAS9_top_" + str(top_n), top_n_list, init_be)
+        util.make_tsv_after_sorting(work_dir + "output/" + f_nm + "_seq_sorted_by_CAS9_top_" + str(top_n), top_n_list, init_be)
         # make excel result
-        util.make_excel_after_sorting(work_dir + "output/mouse_seq_sorted_by_CAS9_top_" + str(top_n), top_n_list, init_be)
+        util.make_excel_after_sorting(work_dir + "output/" + f_nm + "_seq_sorted_by_CAS9_top_" + str(top_n), top_n_list, init_be)
 
 
